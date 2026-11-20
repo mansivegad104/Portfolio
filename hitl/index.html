@@ -163,6 +163,10 @@ td:first-child{font-weight:600}
 .persona .quote{font-style:italic;font-size:1.35rem;line-height:1.45;color:var(--muted)}
 @media (max-width:480px){.persona{padding:24px 20px}}
 
+.callout{background:var(--panel);border-radius:18px;padding:32px 36px;display:flex;flex-direction:column;gap:14px;margin-top:10px}
+.callout .sub-h:first-child{margin-top:0}
+@media (max-width:480px){.callout{padding:24px 20px}}
+
 .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-top:36px}
 
 /* miro-style board */
@@ -257,12 +261,12 @@ footer{padding:72px 0;color:var(--muted);font-size:.9rem}
     <div>
       <h3>Problem</h3>
       <p class="sub">The verification bottleneck</p>
-      <p>Whenever a claim triggered a low-confidence AI decision, handlers had to manually re-verify it, jumping between the CRM, email, and PDF viewers, and scanning full documents to find a single data point. It took 40 to 50 minutes per claim.</p>
+      <p>Whenever a claim triggered a low-confidence AI decision, handlers had to manually re-verify it, jumping between the CRM, email, and PDF viewers, and scanning full documents to find a single data point. It took 40 to 50 minutes per claim. Review also sat outside the flow, so builders couldn’t choose where a person should step in.</p>
     </div>
     <div>
       <h3>Solution</h3>
-      <p class="sub">A review step builders place on the canvas</p>
-      <p>Builders add a HITL block on the canvas that pauses a claim and routes it on the reviewer's decision. Reviewers work in a Human Review tab in Flow Details, next to Connected apps and Logs. There they see the email, every attached document and all the AI's predictions with confidence scores, ready to edit on one page. They can check and correct values without jumping between email and PDF viewers.</p>
+      <p class="sub">Review that fits inside the automation</p>
+      <p>Builders decide where a person steps in, instead of review being a separate stage after the flow. Reviewers get the whole claim in one place, with the AI’s confidence on every value, so they fix what’s doubtful rather than re-check everything.</p>
     </div>
     <div>
       <h3>Result</h3>
@@ -300,14 +304,18 @@ footer{padding:72px 0;color:var(--muted);font-size:.9rem}
       <p>When the AI made a low-confidence decision on a claim, a handler had to check it by hand. They jumped between the CRM, the email and PDF viewers, and scanned whole documents to find a single data point.</p>
       <p>The tooling made it worse. Review sat outside Flow Builder as a separate post-processing step, so builders could not choose where a person steps in. Reviewers could only approve or reject. No screen showed the email, its attachments and the AI's output together.</p>
       <p>That limited trust in AI decisions, and it limited how much teams were willing to automate.</p>
+      <div class="callout">
       <h3 class="sub-h">Why solve it now</h3>
-      <ul class="clean">
-        <li><b>Cost and compliance.</b> Rising pressure across the industry to cut claims-handling cost while improving compliance and audit readiness.</li>
-        <li><b>Trust.</b> Teams need a structured, confidence-aware way for people to control AI decisions before automating more.</li>
-        <li><b>One system.</b> Configuration, execution, human review and routing lived in separate places. HITL connects them.</li>
-      </ul>
-      <h3 class="sub-h">Objective</h3>
-      <p>Design the mandatory Human-in-the-Loop system so it functions as a trust layer, not a compliance checkbox, turning a legal requirement into a feature that accelerates enterprise adoption.</p>
+        <ul class="clean">
+          <li><b>Cost and compliance.</b> Rising pressure across the industry to cut claims-handling cost while improving compliance and audit readiness.</li>
+          <li><b>Trust.</b> Teams need a structured, confidence-aware way for people to control AI decisions before automating more.</li>
+          <li><b>One system.</b> Configuration, execution, human review and routing lived in separate places. HITL connects them.</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <h3 class="sub-h">Objective</h3>
+        <p>Design the mandatory Human-in-the-Loop system so it functions as a trust layer, not a compliance checkbox, turning a legal requirement into a feature that accelerates enterprise adoption.</p>
+      </div>
     </div>
   </div>
 </section>
