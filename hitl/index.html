@@ -171,7 +171,7 @@ td:first-child{font-weight:600}
 .wf-block .sub-h{margin-top:0}
 .wf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:26px;counter-reset:wf}
 .wf li{counter-increment:wf;position:relative;background:var(--panel);border-radius:10px;padding:14px 14px 16px;font-size:.86rem;line-height:1.45;display:flex;flex-direction:column;gap:10px}
-.wf li::before{content:counter(wf);width:26px;height:26px;border-radius:50%;border:2px solid var(--ink);font-family:var(--mono);font-size:.78rem;display:grid;place-items:center;flex:none}
+.wf-i{flex:none;color:var(--ink)}
 .wf li:not(:last-child)::after{content:"\2192";position:absolute;right:-26px;top:50%;width:26px;transform:translateY(-50%);text-align:center;color:var(--muted);font-size:1.2rem;line-height:1}
 .wf-note{border:1px solid var(--rule);border-radius:18px;padding:22px 28px}
 .wf-note p{font-size:1.02rem;line-height:1.6}
@@ -227,6 +227,7 @@ td:first-child{font-weight:600}
 .tabs button{font:inherit;font-weight:500;font-size:.95rem;letter-spacing:-.02em;border:0;background:transparent;color:var(--muted);padding:9px 20px;border-radius:99px;cursor:pointer}
 .tabs button:hover{color:var(--ink)}
 .tabs button[aria-selected="true"]{background:var(--paper);color:var(--ink);box-shadow:0 1px 3px rgba(29,20,48,.15)}
+@media (max-width:760px){.tabs{display:flex;flex-wrap:nowrap;overflow-x:auto;max-width:100%;align-self:stretch;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}.tabs::-webkit-scrollbar{display:none}.tabs button{flex:none;white-space:nowrap;padding:9px 16px;scroll-snap-align:center}}
 .tab-panel{margin-top:32px}
 .tab-panel:focus-visible{outline:2px solid var(--accent);outline-offset:6px;border-radius:8px}
 
@@ -257,6 +258,12 @@ footer{padding:72px 0;color:var(--muted);font-size:.9rem}
   section{padding-top:52px}
 }
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+.why{font-style:italic;color:var(--muted);margin-top:-4px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.opt{border:1px solid var(--rule);border-radius:18px;padding:20px 24px}
+.opt p{margin:8px 0 0}
+.opt.chosen{background:var(--panel)}
+@media (max-width:860px){.opts{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -373,21 +380,21 @@ footer{padding:72px 0;color:var(--muted);font-size:.9rem}
       <h2>Who is it for</h2>
       <div class="persona">
         <h3>Sarah, Claims Handler, 31, Oslo</h3>
-        <p class="quote">"I spend more time copying and pasting than I do talking to customers or making decisions."</p>
-        <p><b>Wants</b> to cut time spent on manual data entry and transcription, and spend her judgment only on the complex, high-value, or escalated cases that actually need it.</p>
+        <p class="quote">"I spend more time checking and updating than I do talking to customers or making decisions."</p>
+        <p><b>Wants</b> to cut time spent on manual checking and updating, and spend her judgment only on the complex, high-value, or escalated cases that actually need it.</p>
         <p><b>Blocked by</b> switching between 3+ apps per claim, manually cross-referencing 10+ documents to find a single data point, and having to hold the entire claim context in memory before deciding.</p>
       </div>
       <div class="wf-block">
         <h3 class="sub-h">The pre-HITL verification workflow</h3>
         <ol class="wf">
-          <li>Locate and download the flagged claim’s files</li>
-          <li>Open each file in a different application</li>
-          <li>Manually search for the right data point in each document</li>
-          <li>Transcribe the corrected value back into the CRM</li>
-          <li>Sign off and move to the next claim</li>
+          <li><svg class="wf-i" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg><span>Locate and download the flagged claim’s files</span></li>
+          <li><svg class="wf-i" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="13" height="11" rx="2"/><path d="M8 19h10a3 3 0 0 0 3-3V9"/></svg><span>Open each file in a different application</span></li>
+          <li><svg class="wf-i" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><span>Manually search for the right data point in each document</span></li>
+          <li><svg class="wf-i" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 0 1 3 3L8 19l-4 1z"/><path d="M14.5 6.5l3 3"/></svg><span>Update the CRM with the corrected value</span></li>
+          <li><svg class="wf-i" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg><span>Sign off and move to the next claim</span></li>
         </ol>
         <div class="wf-note">
-          <p>That five-step loop, repeated dozens of times a day, was the actual job Sarah was doing, and almost none of it required her judgment. It was transcription wearing the costume of decision-making.</p>
+          <p>That five-step loop, repeated dozens of times a day, was the actual job Sarah was doing, and almost none of it required her judgment. It was routine checking and updating wearing the costume of decision-making.</p>
         </div>
       </div>
     </div>
@@ -481,7 +488,13 @@ footer{padding:72px 0;color:var(--muted);font-size:.9rem}
     <div class="stack col">
       <span class="eyebrow">Core idea</span>
       <h2>A human decision as a block in the flow</h2>
+      <p class="why">Because review sat outside Flow Builder as a separate step, builders couldn't decide where a person steps in.</p>
       <p>Instead of a review layer on the side, HITL is a block that builders place, configure and connect like any other. When a run reaches it, the flow pauses and a review record is created. When the reviewer acts, the flow resumes on the branch for that action.</p>
+      <h3 class="sub-h">Two ways to add review to a flow</h3>
+      <div class="opts">
+        <div class="opt"><b>A fixed Approve / Reject step</b><p>Simple to build, but one fixed choice can't match each team's process. Handlers need actions like "Send to specialist", and the flow needs a branch for each.</p></div>
+        <div class="opt chosen"><b>A block with builder-defined actions (chosen)</b><p>Builders type their own action names and configure the flow under each one. The reviewer's choice decides which branch runs next.</p></div>
+      </div>
     </div>
     <div class="flow" role="list" style="margin-top:24px">
       <div role="listitem"><b>Flow runs</b>Classify and extract</div>
@@ -494,8 +507,10 @@ footer{padding:72px 0;color:var(--muted);font-size:.9rem}
     </div>
     <div class="stack col" style="margin-top:40px">
       <h3 class="sub-h">Actions become branches</h3>
+      <p class="why">Because reviewers don't only approve or reject, and builders needed each decision to continue the flow.</p>
       <p>Builders name 1 to 5 reviewer actions, such as "Submit claim" or "Send to specialist". On Save, each name becomes a labelled branch. The same names appear in the reviewer's Take Action menu and as queue filters, so the builder's intent and the reviewer's choice stay in sync.</p>
       <h3 class="sub-h">The block exists the moment you drop it</h3>
+      <p class="why">Because engineering feedback showed that half-configured blocks created edge cases.</p>
       <p>Picking HITL from the Logic tab places the block with default settings and opens the configuration modal. <mark>Save updates the block. Cancel changes nothing.</mark> That one rule removed a whole class of edge cases.</p>
     </div>
     <figure class="wide">
@@ -534,6 +549,7 @@ footer{padding:72px 0;color:var(--muted);font-size:.9rem}
     <div class="stack col">
       <span class="eyebrow">The review page</span>
       <h2>Context, confidence and control in one place</h2>
+      <p class="why">Because handlers jumped between the CRM, the email and PDF viewers, and scanned whole documents to find a single value.</p>
       <p>One claim can arrive as an email plus several attachments. A chip strip lists each file. Switching chips updates the viewer and the File Insights, which hold classifications per document. <mark>Global Extract</mark> on the right holds case-level fields and stays put when you switch files. The layout matches how the data works: document type belongs to a file, policy number belongs to the claim.</p>
       <p>Each field state tells the reviewer where to look and what they can do:</p>
     </div>
@@ -557,6 +573,7 @@ footer{padding:72px 0;color:var(--muted);font-size:.9rem}
     </figure>
     <div class="stack col" style="margin-top:40px">
       <h3 class="sub-h">Decisions are deliberate and final</h3>
+      <p class="why">Because undo and bulk approval stayed out of the MVP, for compliance and scope, so every case gets its own decision.</p>
       <p>Take Action lists the builder's action names. Choosing one opens a short confirmation. On confirm, the flow resumes, the log updates, and the page locks into view mode. Undo was out of scope for the MVP, so the confirmation step matters.</p>
       <p>I later refined the queue for teams. An "In review" column shows who has a case open. The page says "You are reviewing this case since…", and a Hand back button releases it. That prevents two people working on the same claim.</p>
     </div>
@@ -610,15 +627,6 @@ footer{padding:72px 0;color:var(--muted);font-size:.9rem}
   </div>
 </section>
 
-<!-- 13. What people said -->
-<section>
-  <div class="wrap col stack">
-    <span class="eyebrow">Feedback</span>
-    <h2>What people said</h2>
-    <div class="todo-block">Add one or two real quotes, for example from the product owner, a customer or a claims handler, with their role. Get permission before naming a person or company. Remove this section if you have none.</div>
-  </div>
-</section>
-
 <!-- 14. Learnings -->
 <section>
   <div class="wrap">
@@ -636,10 +644,6 @@ footer{padding:72px 0;color:var(--muted);font-size:.9rem}
 </section>
 
 </main>
-
-<footer>
-  <div class="wrap">Mansivegad · Product designer · Screens are from the design file and use sample data.</div>
-</footer>
 
 <script>
 (function(){
@@ -679,6 +683,7 @@ footer{padding:72px 0;color:var(--muted);font-size:.9rem}
       t.tabIndex=on?0:-1;
       document.getElementById(t.getAttribute('aria-controls')).hidden=!on;
     });
+    try{var bar=tab.parentNode;if(bar.scrollWidth>bar.clientWidth)bar.scrollTo({left:tab.offsetLeft-(bar.clientWidth-tab.offsetWidth)/2,behavior:'smooth'});}catch(e){}
   }
   tabs.forEach(function(t,i){
     t.addEventListener('click',function(){sel(t)});
