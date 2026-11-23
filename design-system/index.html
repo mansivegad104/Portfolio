@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Inter:wght@400;500;600&family=Newsreader:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1D0E39; --p80:#493E60; --p60:#776E88; --p40:#A49FAF;
+  --violet:#6F00D7; --card:#FAFAFA; --line:#E2E0E6; --lav:#F4F0FF;
+  --serif:'Newsreader','Grenette Pro',Georgia,serif;
+  --sans:'Inter','ABC Diatype',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{background:#FCFBFD}
+body{font-family:var(--sans);color:var(--p80);-webkit-font-smoothing:antialiased;line-height:1.5}
+.wrap{max-width:1250px;margin:0 auto;padding:0 clamp(16px,4vw,99px)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;color:var(--p80)}
+.eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--violet);font-weight:500}
+.sec-title{font-size:clamp(30px,3.4vw,40px);line-height:1.2;margin-top:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px}
+
+.back{display:inline-block;margin-top:24px;font-size:13px;color:var(--violet);text-decoration:none;font-weight:500}
+.back:hover{text-decoration:underline}
+
+/* hero */
+.hero{text-align:center;padding:56px 0 0}
+.hero h1{font-size:clamp(40px,5vw,56px);line-height:1.1}
+.hero p{font-size:14px;color:var(--p60);margin-top:10px}
+.hero img{display:block;width:100%;margin:28px auto 0;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 97%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 97%,transparent 100%)}
+.note{margin:36px 0 0;background:#F7F2FF;border-radius:20px;padding:22px 24px;text-align:center}
+.note .hey{font-family:'Caveat',cursive;font-size:30px;color:var(--ink);line-height:1}
+.note p{font-size:14px;color:var(--violet);margin-top:12px;display:flex;gap:8px;justify-content:center;align-items:flex-start}
+.note svg{flex:none;margin-top:3px}
+
+/* problem */
+.sec{margin-top:72px}
+.problem{margin-top:24px;padding:36px 28px 36px;position:relative}
+.problem .a{max-width:560px;font-size:14px;margin-left:28px}
+.problem .b{margin:18px 0 0 92px}
+.problem .b strong{display:block;font-size:17px;font-weight:600;color:var(--p80)}
+.problem .b span{font-size:14px;display:block;margin-top:6px}
+.problem svg{position:absolute;left:36px;top:84px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
+.two .card{padding:36px 22px 40px}
+.two h2{font-size:28px;margin-bottom:22px}
+.two p,.two li{font-size:14px;line-height:2}
+.two ul{padding-left:22px;margin-top:8px}
+.two li{line-height:1.9;margin-bottom:6px}
+.two b{font-weight:600}
+
+/* process */
+.process{margin-top:36px;padding:28px 12px 30px}
+.process h2{font-size:34px;margin:0 0 30px 14px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0 0;row-gap:34px;padding:0 6px;align-items:center}
+.node{background:#F1EBFF;border-radius:8px;min-height:54px;padding:10px 12px;font-size:13px;line-height:1.35;color:var(--p80);display:flex;align-items:center;justify-content:center;text-align:center;margin:0 22px}
+.node:first-child{margin-left:0}
+.cell{display:flex;align-items:center;gap:0}
+.cell .node{flex:1;margin:0}
+.arr{flex:0 0 74px;display:flex;align-items:center;position:relative;height:20px}
+.arr i{display:block;height:1px;background:#111;flex:1;position:relative}
+.arr i::after{content:'';position:absolute;right:0;top:-3px;border-left:6px solid #111;border-top:3.5px solid transparent;border-bottom:3.5px solid transparent}
+.arr.rev i::after{right:auto;left:0;border-left:0;border-right:6px solid #111}
+.dot{position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:#7C3AED;box-shadow:0 0 0 4px #E4D8FB,0 0 10px 4px #C9B2F7}
+.arr.rev .dot{left:50%}
+.down{grid-column:4;justify-self:center;display:flex;flex-direction:column;align-items:center;height:60px;position:relative;width:20px;margin-top:-8px}
+.down i{width:1px;flex:1;background:#111;position:relative}
+.down i::after{content:'';position:absolute;bottom:0;left:-3px;border-top:6px solid #111;border-left:3.5px solid transparent;border-right:3.5px solid transparent}
+.down .dot{top:auto;bottom:-14px;left:50%;margin-left:-5.5px}
+
+/* images */
+.fig{margin-top:30px;overflow:hidden;border-radius:24px;border:1px solid var(--line);background:var(--card)}
+.fig img{display:block;width:100%;height:auto}
+
+/* atoms */
+.atoms{display:grid;grid-template-columns:repeat(3,1fr);gap:50px;margin-top:28px}
+.ico{width:67px;height:67px;border-radius:20px;background:#E9E3FF;display:flex;align-items:center;justify-content:center;gap:6px}
+.ico b{width:11px;height:11px;border-radius:50%;background:#756E85;display:block}
+.atoms h3{font-size:25px;margin:22px 0 14px;font-family:var(--sans);font-weight:400;color:var(--p80)}
+.atoms p{font-size:12.5px;line-height:1.75;color:var(--p60);max-width:230px}
+
+/* foundation */
+.panel{padding:28px 28px 40px;margin-top:30px}
+.panel h2{font-size:26px;font-family:var(--sans);font-weight:500;color:var(--p80)}
+.panel .lead{font-size:11.5px;color:var(--p60);margin-top:12px}
+.panel h4{font-size:16px;font-weight:500;color:var(--p80);margin-top:36px}
+.panel .txt{font-size:12.5px;color:var(--p60);max-width:370px;margin-top:10px;line-height:1.65}
+.th{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--p60)}
+.sp{display:grid;grid-template-columns:190px 1fr 1fr 1fr 1fr;max-width:600px;align-items:center;margin-top:22px;column-gap:0}
+.sp .th{text-align:center}
+.sp .th:first-child{text-align:left}
+.sp .name{border:1px solid #DDDAE2;border-radius:8px;background:#fff;height:29px;font-size:11.5px;display:flex;align-items:center;padding-left:10px;margin:6px 0}
+.sp .c{font-size:11.5px;text-align:center;height:41px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #E6E4EA}
+.sp .bar{height:41px;display:flex;align-items:center;border-bottom:1px solid #E6E4EA;padding-left:0}
+.sp .bar span{display:block;height:20px;background:#6F00D7}
+.sprow{display:contents}
+.sp .name{margin:6px 0}
+.sp .c,.sp .bar{margin:0}
+.scalewrap{overflow-x:auto}
+.scalewrap .sp{min-width:520px}
+
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:26px}
+.cbox{border:1px solid var(--line);border-radius:16px;padding:16px 16px 12px;background:#FCFCFC}
+.cbox h3{font-family:var(--sans);font-size:17px;font-weight:500;color:var(--p80)}
+.crow{display:grid;grid-template-columns:1fr 70px 100px;align-items:center;column-gap:10px;height:40.5px;font-size:11.5px;color:var(--p60)}
+.crow.head{height:auto;margin-top:18px;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.crow .hx{text-align:left}
+.crow .hxc{text-align:left}
+.sw{height:28px;border-radius:7px;width:84px;justify-self:end}
+.sw.bd{border:1px solid #787480}
+.sw.by{border:1px solid #877A2C}
+.cbox .crow{grid-template-columns:1fr 1fr 90px}
+
+.typef{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}
+.tf{border:1px solid var(--line);border-radius:16px;padding:16px 16px 20px;background:#FCFCFC}
+.tf .l{font-size:14px;color:var(--p80)}
+.tf .big{font-size:clamp(40px,5.2vw,58px);line-height:1.2;margin:28px 0 22px;color:var(--p80);white-space:nowrap}
+.tf .big.h{font-family:var(--serif);font-weight:400}
+.tf .big.b{font-family:var(--sans);font-weight:600;letter-spacing:-.02em}
+.tf .chars{font-size:11.5px;color:var(--p80);line-height:1.5;word-break:break-all}
+.tscale{border:1px solid var(--line);border-radius:22px;background:#fff;margin-top:8px;padding:12px 18px 20px;overflow:hidden}
+.tscale h5{font-family:var(--serif);font-weight:400;font-size:30px;color:#000;line-height:1.2;margin-bottom:22px}
+.tcols{display:grid;gap:12px}
+.t1{grid-template-columns:1.55fr 1.15fr 1.15fr 1fr}
+.t2{grid-template-columns:1.9fr 1.55fr .6fr}
+.spec .n{color:#1D0E39}
+.spec .v{color:var(--violet);font-weight:500;font-size:11.5px;margin-top:2px}
+.spec{margin-bottom:17px}
+.spec .lorem{margin:12px 0 10px;color:#1D0E39;line-height:1.45}
+.sz1{font-size:11px}.sz2{font-size:9.5px}.sz3{font-size:8.5px}.sz4{font-size:7px}
+
+.comps{background:#F4F4F4;border:1px solid var(--line);border-radius:24px;overflow:hidden;margin-top:28px}
+.comps img{display:block;width:100%;height:auto}
+
+.prose{padding:30px 28px}
+.prose h2{font-size:28px;margin-bottom:16px}
+.prose h3{font-size:22px;margin:0 0 10px}
+.prose ul{padding-left:22px}
+.prose li,.prose p{font-size:14px;line-height:1.9;margin-bottom:6px}
+.prose b{font-weight:600}
+.prose h3+.ship{margin-top:14px}
+.ship{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.ship span{background:#F1EBFF;border-radius:8px;padding:10px 14px;font-size:13px}
+.ship i{font-style:normal;color:var(--p60)}
+.card.prose ul+h3{margin-top:26px}
+.chg{display:grid;grid-template-columns:120px 1fr 24px 1.4fr;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}
+.chg:last-child{border-bottom:0}
+.chg span:nth-child(2){color:var(--p60)}
+.chg i{font-style:normal;color:var(--violet)}
+.learn{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+.learn .card{padding:28px 22px}
+.learn h3{font-size:22px;margin-bottom:12px}
+.learn p{font-size:14px;line-height:1.8}
+@media (max-width:720px){.learn{grid-template-columns:1fr}.chg{grid-template-columns:1fr}.chg i{display:none}}
+footer{height:80px}
+@media (max-width:720px){
+  .two,.cgrid,.typef,.atoms{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr;row-gap:12px}
+  .flow .cell{grid-column:auto!important;grid-row:auto!important}
+  .node{margin:0}
+  .arr{display:none}
+  .down{display:none}
+  .tcols.t1,.tcols.t2{grid-template-columns:1fr 1fr}
+  .problem .b{margin-left:28px}.problem svg{display:none}
+  .tf .big{white-space:normal}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back" href="/">← Home</a>
+
+<!-- HERO -->
+<header class="hero">
+  <h1>Design system</h1>
+  <p>Clear, consistent, and component-driven system crafted for design efficiency</p>
+  <img src="/design-system/img/hero.jpg" alt="Design system preview showing color swatches, buttons, badges and checkboxes">
+</header>
+
+<div class="note">
+  <div class="hey">Hey :)</div>
+  <p><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#6F00D7" stroke-width="1.2"><circle cx="7" cy="7" r="6"/><path d="M7 6.2v3.6M7 4.2v.2" stroke-linecap="round"/></svg>In adherence to company policy, certain portions of this case study have been substituted with placeholder content.</p>
+</div>
+
+<!-- PROBLEM -->
+<section class="sec" style="margin-top:56px">
+  <h2 class="sec-title" style="font-size:25px">The Problem</h2>
+  <div class="card problem">
+    <p class="a">The current absence of a cohesive design system within our organization results in inconsistent user experiences, hindered design scalability, and increased development time</p>
+    <svg width="60" height="64" viewBox="0 0 60 64" fill="none"><path d="M3 2 C 3 40, 14 56, 52 56" stroke="#493E60" stroke-width="1.6" stroke-linecap="round"/><path d="M45 50 L53 56 L45 62" stroke="#493E60" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="b">
+      <strong>The team needed a robust design system and organized structure</strong>
+      <span>As the software became more complex and the team grew larger, the team started to face new challenges.</span>
+    </div>
+  </div>
+
+  <div class="two">
+    <div class="card">
+      <h2>Our Solution</h2>
+      <p>Made the Design system for the conceptual AI Automation platform. The primary goal of this project was to create a solid design system foundation that can be utilized during real production and subsequently handed off to the development team.</p>
+      <ul>
+        <li><b>Objective:</b> One system rigorous enough for Flow Builder's canvas but flexible enough for everyday screens, without becoming a bottleneck.</li>
+        <li>A full system from day one: tokens, components, documentation and governance.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Definition of Done</h2>
+      <p>The task considered complete when the following criteria meets :</p>
+      <ul>
+        <li><b>Visual Consistency:</b> The design components adheres to the established visual guidelines, including colors, typography, spacing, and layout.</li>
+        <li><b>Guidelines:</b> set of principles and instructions that ensure consistent and cohesive design across digital products and experiences.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card prose" style="margin-top:18px">
+    <h2>The Investment Argument</h2>
+    <ul>
+      <li>Leadership and product first preferred a lighter, faster-to-ship system with fewer states and less documentation.</li>
+      <li>Flow Builder needed custom node types, a path-filtering variable selector, stateful toolbars, and zoom and pan controls. That made the case for the fuller system.</li>
+      <li>The two projects were built in parallel. Everyday screens tested the general system, and Flow Builder pushed it into harder problems.</li>
+    </ul>
+  </div>
+
+  <!-- PROCESS -->
+  <div class="card process">
+    <h2>Process</h2>
+    <div class="flow">
+      <div class="cell"><div class="node">New component<br>Requirement</div><div class="arr"><i></i></div></div>
+      <div class="cell"><div class="node">Check If Existing component can be used</div><div class="arr"><i></i><b class="dot"></b></div></div>
+      <div class="cell"><div class="node">Creating and prioritizing task in planner</div><div class="arr"><i></i><b class="dot"></b></div></div>
+      <div class="cell"><div class="node">Create a new component</div></div>
+      <div class="down"><i></i></div>
+      <div class="cell" style="grid-column:1;grid-row:3"><div class="node">Handover to developement</div><div class="arr rev"><i></i></div></div>
+      <div class="cell" style="grid-column:2;grid-row:3"><div class="node">Create Release notes &amp; update change logs</div><div class="arr rev"><i></i></div></div>
+      <div class="cell" style="grid-column:3;grid-row:3"><div class="node">Publish Component</div><div class="arr rev"><i></i></div></div>
+      <div class="cell" style="grid-column:4;grid-row:3"><div class="node">Review with team</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MAPPING -->
+<section class="sec" style="margin-top:56px">
+  <div class="eyebrow">Foundation &amp; components</div>
+  <h2 class="sec-title">Mapping</h2>
+  <div class="fig"><img src="/design-system/img/mapping.jpg" alt="Interface mapped to components: avatar, text badge, button, dropdown, radio, search, pagination, switcher, empty state, breadcrumb, input field, list view, icon button" loading="lazy"></div>
+</section>
+
+<!-- ELEMENTS -->
+<section class="sec" style="margin-top:44px">
+  <div class="eyebrow">Atomic design</div>
+  <h2 class="sec-title">Elements</h2>
+  <div class="atoms">
+    <div><div class="ico"><b></b></div><h3>Atoms</h3><p>These are the smallest and most basic building blocks. These are applied to web interfaces as labels, input fields, buttons, etc. They can also contain color palettes, fonts, etc.</p></div>
+    <div><div class="ico"><b></b><b></b></div><h3>Molecules</h3><p>When atoms are combined, we get molecules: groups of atoms, bonded together that are the smallest fundamental units of a compound. Molecules can take on their own priorities, too.</p></div>
+    <div><div class="ico"><b></b><b></b><b></b></div><h3>Organisms</h3><p>Are formed by using molecules as our building blocks. When molecules are joined together, it becomes a relatively complex and distinct section of the interfaces that have been created.</p></div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="sec" style="margin-top:56px">
+  <div class="eyebrow">Prioritize &amp; backlog</div>
+  <h2 class="sec-title">Timeline</h2>
+  <div class="fig"><img src="/design-system/img/timeline.jpg" alt="Component priority list and design timeline for phase 1 and phase 2, 29th May to 28th June" loading="lazy"></div>
+</section>
+
+<!-- FOUNDATION -->
+<section class="sec" style="margin-top:56px">
+  <div class="eyebrow">Design system</div>
+  <h2 class="sec-title">Foundation</h2>
+
+  <div class="card panel">
+    <h2>Grid &amp; Spacing</h2>
+    <p class="lead">A Spacing system supports the creation of simple page layouts &amp; Understandable UI</p>
+    <h4>Spacing base unit</h4>
+    <p class="txt" style="max-width:400px">Our spacing system is built around a base unit of 8 pixels. This base unit determines the spacing scale and ensures visual consistency across products.</p>
+    <h4>Scale</h4>
+    <div class="scalewrap"><div class="sp" id="spacing">
+      <div class="th">Foundation (global styles)</div><div class="th">Multiplier</div><div class="th">REM</div><div class="th">Pixel</div><div class="th">Multiplier</div>
+    </div></div>
+  </div>
+
+  <div class="card panel" id="colors">
+    <h2>Colors</h2>
+    <p class="lead">Color distinguishes our brand and reinforces consistent experiences across products.</p>
+    <div class="cgrid" id="cgrid"></div>
+  </div>
+
+  <div class="card panel">
+    <h2>Typography</h2>
+    <p class="lead">Color distinguishes our brand and reinforces consistent experiences across products.</p>
+    <h4 style="margin-top:28px">Typefaces</h4>
+    <p class="txt">Simplifai uses ABC Diatype &amp; Grenette pro</p>
+    <div class="typef">
+      <div class="tf"><div class="l">Heading</div><div class="big h">ABC Diatype</div><div class="chars">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789!@#$%^&amp;*()</div></div>
+      <div class="tf"><div class="l">Body</div><div class="big b">ABC Diatype</div><div class="chars">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789!@#$%^&amp;*()</div></div>
+    </div>
+
+    <div class="tscale"><div class="tcols t1">
+      <div><h5>Headings</h5>
+        <div class="spec"><div class="n" style="font-family:var(--serif);font-size:21px">Headings/H1</div><div class="v">Grenette Pro 56/64</div></div>
+        <div class="spec"><div class="n" style="font-family:var(--serif);font-size:20px">Headings/H2</div><div class="v">Grenette Pro 48/56</div></div>
+        <div class="spec"><div class="n" style="font-family:var(--serif);font-size:19px">Headings/H3</div><div class="v">Grenette Pro 40/48</div></div>
+        <div class="spec"><div class="n" style="font-family:var(--serif);font-size:17px">Headings/H4</div><div class="v">Grenette Pro 32/40</div></div>
+        <div class="spec"><div class="n" style="font-size:13px;font-weight:500">Headings/H5</div><div class="v">ABC Diatype 24/32</div></div>
+        <div class="spec"><div class="n" style="font-size:9px;font-weight:500">Headings/H4</div><div class="v">ABC Diatype 16/24</div></div>
+      </div>
+      <div><h5>Buttons</h5>
+        <div class="spec"><div class="n" style="font-size:9.5px;font-weight:500;margin-top:30px">Large Button</div><div class="v" style="margin-top:8px">ABC Diatype 20/28</div></div>
+        <div class="spec" style="margin-top:34px"><div class="n" style="font-size:8.5px;font-weight:500">Medium Button</div><div class="v" style="margin-top:8px">ABC Diatype 16/24</div></div>
+        <div class="spec" style="margin-top:34px"><div class="n" style="font-size:8px;font-weight:500">Small Button</div><div class="v" style="margin-top:8px">ABC Diatype 14/20</div></div>
+        <div class="spec" style="margin-top:34px"><div class="n" style="font-size:6.5px;font-weight:500">Tiny Button</div><div class="v" style="margin-top:8px">ABC Diatype 12/16</div></div>
+      </div>
+      <div><h5>Badges</h5>
+        <div class="spec"><div class="n" style="font-size:8px;font-weight:500;margin-top:30px">LARGE BADGE</div><div class="v" style="margin-top:8px">ABC Diatype 14/19</div></div>
+        <div class="spec" style="margin-top:34px"><div class="n" style="font-size:7px;font-weight:500">MEDIUM BADGE</div><div class="v" style="margin-top:8px">ABC Diatype 12/16</div></div>
+        <div class="spec" style="margin-top:34px"><div class="n" style="font-size:6px;font-weight:500">SMALL BADGE</div><div class="v" style="margin-top:8px">ABC Diatype 10/13</div></div>
+        <div class="spec" style="margin-top:34px"><div class="n" style="font-size:5px;font-weight:500">TINY BADGE</div><div class="v" style="margin-top:8px">ABC Diatype 8/11</div></div>
+      </div>
+      <div><h5>Titles</h5>
+        <div class="spec"><div class="n" style="font-size:9.5px;font-weight:500;margin-top:30px">Large Title</div><div class="v" style="margin-top:4px">ABC Diatype 24/32</div></div>
+        <div class="spec" style="margin-top:34px"><div class="n" style="font-size:9.5px;font-weight:500">Medium Title</div><div class="v" style="margin-top:4px">ABC Diatype 22/30</div></div>
+        <div class="spec" style="margin-top:34px"><div class="n" style="font-size:9.5px;font-weight:500">Small Title</div><div class="v" style="margin-top:4px">ABC Diatype 20/28</div></div>
+        <div class="spec" style="margin-top:34px"><div class="n" style="font-size:9px;font-weight:500">Tiny Title</div><div class="v" style="margin-top:4px">ABC Diatype 18/26</div></div>
+      </div>
+    </div></div>
+
+    <div class="tscale" id="bodytypes"><div class="tcols t2" id="t2"></div></div>
+  </div>
+</section>
+
+<!-- COMPONENTS -->
+<section class="sec" style="margin-top:56px">
+  <div class="eyebrow">Design system</div>
+  <h2 class="sec-title">Components</h2>
+  <div class="card prose" style="margin-top:26px">
+    <h2>Anatomy of a component</h2>
+    <ul>
+      <li>Every component uses the same documentation structure: Brief, Live Usage, Copy Me block, states and variants matrix, and Behavior, Layout and Content guidance with right and wrong examples.</li>
+      <li><b>Accordion</b> was among the first documented, with small, medium and large sizes, a live settings-screen example, and layout rules for the expand caret.</li>
+      <li>The same structure applies across the library, from Badges and Chips to Dropdowns (ten types, roughly two dozen state variants).</li>
+    </ul>
+  </div>
+  <div class="comps">
+    <img src="/design-system/img/comp0.jpg" alt="Components: Accordian, Avatar &amp; Avatar Group, Badge" loading="lazy">
+    <img src="/design-system/img/comp1.jpg" alt="Components: Badge, Breadcrumb, Button" loading="lazy">
+    <img src="/design-system/img/comp2.jpg" alt="Components: Button, Dropdown, List" loading="lazy">
+    <img src="/design-system/img/comp3.jpg" alt="Components: List, Radio buttons, Spinner, Toast, Tooltip" loading="lazy">
+  </div>
+</section>
+<section class="sec" style="margin-top:56px">
+  <div class="eyebrow">Design system</div>
+  <h2 class="sec-title">Governance</h2>
+  <div class="card prose" style="margin-top:26px">
+    <ul>
+      <li>The whole team (designers, engineers, PMs) had Figma library access, with no gatekeeping.</li>
+      <li>Consistency came from a strict component and variant structure, plus a weekly design review that checked new or changed work before merging.</li>
+      <li>A running checklist tracked shipped states for each foundational piece (hover, disabled, keyboard support) so gaps were visible.</li>
+      <li>Design tokens were exported directly to CSS variables and JSON, so nothing was re-implemented by hand.</li>
+    </ul>
+    <h3>How a component ships</h3>
+    <div class="ship"><span>Proposed in the shared library</span><i>→</i><span>Checked against the checklist</span><i>→</i><span>Reviewed in weekly critique</span><i>→</i><span>Merged</span><i>→</i><span>Tokens exported to code</span></div>
+  </div>
+
+  <h2 class="sec-title" style="margin-top:48px;font-size:28px">Changelog</h2>
+  <div class="card prose" style="margin-top:18px">
+    <div class="chg"><b>Avatar</b><span>Single letter, 4 sizes, 3 colors</span><i>→</i><span>Two-initial variant, 5 sizes, light and dark themes</span></div>
+    <div class="chg"><b>Badge</b><span>Light theme only</span><i>→</i><span>Dark theme across variants, plus new status and icon states</span></div>
+    <div class="chg"><b>Dropdowns</b><span>Image and other variants</span><i>→</i><span>9 new variants, including subtext, brand icon and checkbox combinations</span></div>
+  </div>
+</section>
+
+<section class="sec" style="margin-top:56px">
+  <div class="eyebrow">Design system</div>
+  <h2 class="sec-title">One system, many surfaces</h2>
+  <div class="two">
+    <div class="card prose" style="padding-top:30px"><h3>Flow Builder</h3>
+      <p>The contextual variable selector (a nested tree that filters variables by execution path) is built from the accordion and dropdown components. Canvas nodes (Apps, Logic, AI Skills) are documented components with default, filled, success and error states across default, hover and selected.</p></div>
+    <div class="card prose" style="padding-top:30px"><h3>Human-in-the-Loop workspace</h3>
+      <p>Uses list and table components for the claim review queue, and badges for AI confidence scores.</p></div>
+  </div>
+</section>
+
+<section class="sec" style="margin-top:56px">
+  <div class="eyebrow">Outcome</div>
+  <h2 class="sec-title">Impact</h2>
+  <div class="card prose" style="margin-top:26px">
+    <ul>
+      <li>Teams stopped rebuilding the same components, so new features shipped faster with less custom engineering.</li>
+      <li>Reuse let the Flow Builder team focus on hard problems (canvas tooling, the toolbar state machine) and not on basic forms and tables.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" style="margin-top:56px">
+  <div class="eyebrow">Reflection</div>
+  <h2 class="sec-title">Learnings</h2>
+  <div class="learn">
+    <div class="card"><h3>Governance beats gatekeeping</h3><p>Open library access plus weekly reviews worked better than routing every change through one person.</p></div>
+    <div class="card"><h3>Invest early</h3><p>Committing to the fuller system before Flow Builder's complexity arrived avoided a rushed rebuild.</p></div>
+    <div class="card"><h3>One source of truth</h3><p>Exporting tokens to code kept design and engineering aligned better than a manual handoff.</p></div>
+  </div>
+</section>
+<footer></footer>
+</div>
+
+<script>
+// Spacing scale
+var S=[["Space.0","0x","0 rem",0],["Space.025","0.25x","0.125 rem",2],["Space.050","0.5x","0.25 rem",4],["Space.075","0.75x","0.375 rem",6],["Space.100","1x","0.5 rem",8],["Space.150","1.5x","0.75 rem",12],["Space.200","2x","1 rem",16],["Space.250","2.5x","1.25 rem",24],["Space.300","3x","1.5 rem",24],["Space.400","4x","2 rem",32],["Space.500","5x","2.5 rem",40],["Space.600","6x","3 rem",48],["Space.700","7x","3.5 rem",56],["Space.800","8x","4 rem",64],["Space.900","9x","4.5 rem",72],["Space.1000","10x","5 rem",80]];
+var sp=document.getElementById('spacing'),h='';
+S.forEach(function(r){h+='<div class="name">'+r[0]+'</div><div class="c">'+r[1]+'</div><div class="c">'+r[2]+'</div><div class="c">'+r[3]+' px</div><div class="bar">'+(r[3]?'<span style="width:'+r[3]*0.55+'px"></span>':'')+'</div>';});
+sp.insertAdjacentHTML('beforeend',h);
+
+// Colors (names, hex labels and swatches as in the original)
+var C=[
+["Primary",[["Primary 100","1D0E39","#1D0E39"],["Primary 80","493E60","#493E60"],["Primary 60","776E88","#776E88"],["Primary 40","A49FAF","#A49FAF"],["Primary 20","D2CFD7","#D2CFD7"]]],
+["Secondary",[["Secondary 100","6F00D7","#6F00D7"],["Secondary 80","8C33DF","#8C33DF"],["Secondary 60","A966E7","#A966E7"],["Secondary 40","C599EF","#C599EF"],["Secondary 20","E2CCF7","#E2CCF7"]]],
+["Neutral/panel",[["Floral 100","1D0E39","#C9BBFF"],["Floral 80","493E60","#D6CAFF"],["Floral 60","776E88","#E0D6FF"],["Floral 40","A49FAF","#EAE3FF"],["Floral 20","D2CFD7","#F3F0FF"]]],
+["Neutral/white",[["White 100","6F00D7","#FFFFFF","bd"],["White 80","8C33DF","#FAFAFB","bd"],["White 60","A966E7","#F2F2F0","bd"],["White 40","C599EF","#EBEBEB","bd"],["White 20","E2CCF7","#E1E1E1","bd"]]],
+["Neutral/yellow",[["Primary 100","FDFFBF","#FDFFBF","by"],["Primary 80","FDFFCC","#FDFFCC","by"],["Primary 60","FEFFD9","#FEFFD9","by"],["Primary 40","FEFFE5","#FEFFE5","by"],["Primary 20","FFFFF2","#FFFFF2","by"]]],
+["Neutral/Gray",[["Secondary 100","6F00D7","#7D7589"],["Secondary 80","8C33DF","#BDBAC4"],["Secondary 60","A966E7","#D8D6DC"],["Secondary 40","C599EF","#E5E3E8"],["Secondary 20","E2CCF7","#F8F8F8","bd"]]],
+["Message/Missing",[["Army","5E5504","#5E5504"],["Olive","87732C","#87732C"],["Peanut","C1A541","#C1A541"],["Ocra","EAD567","#EAD567"],["Beige","F1E39C","#F1E39C"]]],
+["Message/Success",[["Forest","05661A","#05661A"],["Pine","378548","#378548"],["Green","41C967","#41C967"],["Pistachio","C1F2B7","#C1F2B7"],["Mint","DAF8D4","#DAF8D4"]]],
+["Message/Error",[["Burgundy","A00A00","#A00A00"],["Sangria","C3170D","#C3170D"],["Red","FA4339","#FA4339"],["Coral","EDA192","#EDA192"],["Apricot","F4C6BD","#F4C6BD"]]],
+["Status/new",[["Navy","1028A5","#1028A5"],["Iceberg","2A80C7","#268AFF"],["Sky","42D3E7","#42D3E7"],["Arctic","8CEAFF","#8CEAFF"],["Ice","BAF2FF","#BAF2FF"]]]
+];
+var g=document.getElementById('cgrid'),o='';
+C.forEach(function(b){
+  o+='<div class="cbox"><h3>'+b[0]+'</h3><div class="crow head th"><span>Name</span><span>Hex</span><span style="text-align:right;padding-right:26px">Usage</span></div>';
+  b[1].forEach(function(r){o+='<div class="crow"><span>'+r[0]+'</span><span>'+r[1]+'</span><span class="sw '+(r[3]||'')+'" style="background:'+r[2]+'"></span></div>';});
+  o+='</div>';
+});
+g.innerHTML=o;
+
+// Body type + links
+var L='Qui Qui Perspiciatis. Excepturi Qui Et Doloribus Dolores Dolorem Blanditiis. Eius Ea Cum Natus Neque Voluptatem Illo Doloremque Eveniet Qui. Possimus Consequatur Ipsam. Animi Quis Rem Pariatur Modi.';
+function col(title,bold){
+  var d=[["Large","20/28","sz1",18],["Medium","16/24","sz2",15],["Small","14/18","sz3",13],["Tiny","12/16","sz4",11]],s='<div><h5>'+title+'</h5>';
+  d.forEach(function(r){s+='<div class="spec" style="margin-bottom:26px"><div class="n '+r[2]+'" style="font-weight:500">'+r[0]+' Body Regular</div><div class="lorem '+r[2]+'" style="font-weight:'+(bold?600:400)+';max-width:'+(bold?'330':'290')+'px">'+L+'</div><div class="v">ABC Diatype '+r[1]+'</div></div>';});
+  return s+'</div>';
+}
+var lk=[["Large Link","18/26"],["Medium Link","16/24"],["Small Link","14/18"],["Tiny Link","12/16"]],lh='<div><h5>Links</h5>';
+lk.forEach(function(r){lh+='<div class="spec" style="margin-bottom:30px"><div class="v" style="font-weight:400;font-size:8.5px;margin-bottom:6px">'+r[0]+'</div><div class="v">ABC Diatype '+r[1]+'</div></div>';});
+document.getElementById('t2').innerHTML=col('Body Type Regular',false)+col('Body Type Bold',true)+lh+'</div>';
+</script>
+</body>
+</html>
